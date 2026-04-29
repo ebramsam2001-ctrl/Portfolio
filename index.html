@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ebram Samuel - Full Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+[data-theme="dark"]{
+  --bg:#0a0a0f;--surface:#12121a;--card:#1a1a26;
+  --accent:#00ff88;--accent2:#7c3aed;--accent3:#f59e0b;
+  --text:#e8e8f0;--muted:#6b6b8a;--border:rgba(255,255,255,0.07);
+  --nav-bg:rgba(10,10,15,0.9);
+}
+[data-theme="light"]{
+  --bg:#f4f4ef;--surface:#eaeae5;--card:#ffffff;
+  --accent:#00884a;--accent2:#6d28d9;--accent3:#d97706;
+  --text:#1a1a2e;--muted:#55556e;--border:rgba(0,0,0,0.1);
+  --nav-bg:rgba(244,244,239,0.95);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;transition:background 0.35s,color 0.35s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:var(--nav-bg);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:background 0.35s;}
+.nav-logo{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:var(--accent);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:0.85rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+.theme-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.25s;color:var(--text);flex-shrink:0;}
+.theme-btn:hover{border-color:var(--accent);transform:rotate(15deg);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 4rem;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);}
+.hero-glow{position:absolute;top:20%;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.12) 0%,transparent 70%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:0;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,136,0.06) 0%,transparent 70%);pointer-events:none;}
+.hero-content{position:relative;z-index:1;max-width:900px;}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--accent);border:1px solid rgba(0,200,100,0.35);padding:0.35rem 0.9rem;border-radius:2rem;margin-bottom:2rem;animation:fadeUp 0.8s ease both;}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(1.6);}}
+h1{font-size:clamp(3rem,8vw,7rem);font-weight:800;line-height:0.95;letter-spacing:-0.04em;animation:fadeUp 0.8s 0.15s ease both;}
+.line2{color:var(--accent);display:block;}
+.hero-sub{margin-top:2rem;font-size:1.1rem;color:var(--muted);max-width:560px;line-height:1.7;animation:fadeUp 0.8s 0.3s ease both;}
+.hero-cta{margin-top:3rem;display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.8s 0.45s ease both;}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.85rem 2rem;border-radius:0.4rem;font-family:'Space Mono',monospace;font-size:0.82rem;font-weight:700;letter-spacing:0.05em;text-decoration:none;transition:all 0.25s;cursor:pointer;border:none;}
+.btn-primary{background:var(--accent);color:#000;}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,200,100,0.3);}
+.btn-ghost{border:1px solid var(--border);color:var(--text);background:transparent;}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.hero-stats{margin-top:5rem;display:flex;gap:3rem;flex-wrap:wrap;animation:fadeUp 0.8s 0.6s ease both;}
+.stat-num{font-family:'Space Mono',monospace;font-size:2.2rem;font-weight:700;color:var(--accent);}
+.stat-label{font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.2rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* SECTIONS */
+section{padding:6rem 3rem;position:relative;transition:background 0.35s;}
+.section-label{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.7rem;}
+.section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:3rem;}
+.section-divider{width:60px;height:3px;background:linear-gradient(90deg,var(--accent),transparent);margin:1rem 0 3rem;}
+
+/* ABOUT */
+#about{background:var(--surface);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.about-text p{color:var(--muted);line-height:1.8;font-size:1rem;margin-bottom:1.2rem;}
+.about-cards{display:flex;flex-direction:column;gap:1rem;}
+.about-card{background:var(--card);border:1px solid var(--border);border-radius:0.75rem;padding:1.5rem;transition:border-color 0.25s,transform 0.25s,background 0.35s;}
+.about-card:hover{border-color:var(--accent);transform:translateX(6px);}
+.about-card h4{font-size:0.95rem;font-weight:700;margin-bottom:0.3rem;}
+.about-card p{font-size:0.82rem;color:var(--muted);}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:0.75rem;padding:1.8rem;transition:all 0.25s;}
+.skill-card:hover{border-color:var(--accent2);transform:translateY(-4px);box-shadow:0 12px 40px rgba(124,58,237,0.1);}
+.skill-card-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.2rem;}
+.skill-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.skill-card h4{font-size:0.95rem;font-weight:700;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.tag{font-family:'Space Mono',monospace;font-size:0.7rem;padding:0.25rem 0.65rem;border-radius:0.25rem;background:rgba(128,128,128,0.08);color:var(--muted);border:1px solid var(--border);}
+.tag.active{background:rgba(0,200,100,0.1);color:var(--accent);border-color:rgba(0,200,100,0.25);}
+
+/* EXPERIENCE */
+#experience{background:var(--surface);}
+.timeline{display:flex;flex-direction:column;}
+.timeline-item{display:grid;grid-template-columns:200px 40px 1fr;gap:0 1.5rem;align-items:start;padding:2rem 0;}
+.timeline-date{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--muted);text-align:right;padding-top:0.3rem;line-height:1.6;}
+.timeline-line{display:flex;flex-direction:column;align-items:center;}
+.timeline-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 4px rgba(0,200,100,0.15);flex-shrink:0;transition:border-color 0.35s;}
+.timeline-connector{width:2px;flex:1;min-height:40px;background:linear-gradient(180deg,var(--accent) 0%,var(--border) 100%);margin-top:4px;}
+.timeline-last .timeline-connector{display:none;}
+.timeline-body h3{font-size:1.1rem;font-weight:700;margin-bottom:0.2rem;}
+.timeline-body .company{font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--accent2);margin-bottom:1rem;}
+.timeline-body ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
+.timeline-body ul li{font-size:0.88rem;color:var(--muted);padding-left:1.2rem;position:relative;line-height:1.6;}
+.timeline-body ul li::before{content:'>';position:absolute;left:0;color:var(--accent);font-size:0.7rem;top:0.15em;}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:0.75rem;padding:2rem;position:relative;overflow:hidden;transition:all 0.3s;}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform 0.35s;}
+.project-card:hover::before{transform:scaleX(1);}
+.project-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.15);}
+.project-num{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);margin-bottom:1rem;}
+.project-card h3{font-size:1.15rem;font-weight:700;margin-bottom:0.75rem;}
+.project-card p{font-size:0.85rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem;}
+
+/* EDUCATION */
+#education{background:var(--surface);}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:0.75rem;padding:2rem;transition:all 0.25s;}
+.edu-card:hover{border-color:var(--accent3);transform:translateY(-4px);}
+.edu-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent3);border:1px solid rgba(217,119,6,0.3);padding:0.2rem 0.6rem;border-radius:0.25rem;margin-bottom:1rem;}
+.edu-card h3{font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;line-height:1.4;}
+.edu-card .school{font-size:0.82rem;color:var(--accent2);margin-bottom:0.4rem;}
+.edu-card .period{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);}
+
+/* CERTS */
+.certs-list{display:flex;flex-direction:column;gap:1rem;max-width:700px;}
+.cert-item{display:flex;align-items:center;gap:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:0.6rem;padding:1.2rem 1.5rem;transition:all 0.25s;}
+.cert-item:hover{border-color:var(--accent);padding-left:2rem;}
+.cert-icon{font-size:1.3rem;flex-shrink:0;}
+.cert-name{font-size:0.92rem;font-weight:600;}
+.cert-link{font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--accent);margin-top:0.2rem;text-decoration:none;display:block;}
+.cert-link:hover{text-decoration:underline;}
+
+/* CONTACT */
+#contact{background:var(--surface);}
+.contact-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.contact-info p{color:var(--muted);line-height:1.8;margin-bottom:2rem;}
+.contact-links{display:flex;flex-direction:column;gap:1rem;}
+.contact-link{display:flex;align-items:center;gap:1rem;color:var(--text);text-decoration:none;font-size:0.9rem;transition:color 0.2s;cursor:pointer;background:none;border:none;text-align:left;width:100%;font-family:'Syne',sans-serif;}
+.contact-link:hover{color:var(--accent);}
+.contact-link-icon{width:38px;height:38px;border-radius:0.5rem;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:background 0.35s;}
+.contact-big{text-align:center;}
+.contact-big p{color:var(--muted);margin-bottom:0.5rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;font-family:'Space Mono',monospace;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);transition:border-color 0.35s;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  #hero{padding:6rem 1.5rem 3rem;}
+  section{padding:4rem 1.5rem;}
+  .about-grid,.contact-wrapper{grid-template-columns:1fr;gap:2rem;}
+  .timeline-item{grid-template-columns:0px 30px 1fr;}
+  .timeline-date{display:none;}
+  footer{flex-direction:column;gap:0.5rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ebram.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="theme-btn" id="theme-btn" title="Toggle light / dark mode">&#127769;</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div style="display: flex; gap: 350px;">
+    <div class="hero-content">
+      <div class="hero-tag"><span class="hero-tag-dot"></span>Available for opportunities</div>
+      <h1>Ebram<span class="line2">Samuel</span></h1>
+      <p class="hero-sub">Full Stack Web Developer building responsive, secure, and scalable web applications - from pixel-perfect frontends to robust backend systems.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-ghost" id="get-in-touch-btn">Get In Touch</a>
+        <a href="https://github.com/ebramsam2001-ctrl" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+        <a href="https://www.linkedin.com/in/ebram-samuel-268b07339/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">5+</div><div class="stat-label">Technologies</div></div>
+        <div><div class="stat-num">5+</div><div class="stat-label">Projects Built</div></div>
+        <div><div class="stat-num">3</div><div class="stat-label">Languages</div></div>
+      </div>
+    </div>
+    <div>
+      <img src="./image.jpg" alt="" width="500px" height="700px" style="border-radius: 60px;">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">01 - About</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a detail-oriented Full Stack Web Developer based in Cairo, Egypt, with a Bachelor's in Computer Science and Artificial Intelligence (Software Engineering) from Ahram Canadian University.</p>
+        <p>I have hands-on experience building full-stack web and mobile applications, integrating RESTful APIs, and managing databases - always with performance and scalability in mind.</p>
+        <p>Currently deepening my skills through the Digilians program and expanding into Flutter and Dart for cross-platform mobile development.</p>
+        <div style="margin-top:1.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <span class="tag active">Cairo, Egypt</span>
+          <span class="tag active">(+20) 155-276-9905</span>
+        </div>
+      </div>
+      <div class="about-cards">
+        <div class="about-card"><h4>&#128187; Frontend</h4><p>Responsive UIs with HTML, CSS, JavaScript, React and Angular.</p></div>
+        <div class="about-card"><h4>&#9881; Backend</h4><p>Scalable APIs with Node.js, Express, .NET, PHP, Python and Java.</p></div>
+        <div class="about-card"><h4>&#128241; Mobile</h4><p>Cross-platform apps with Flutter and Dart for Android and iOS.</p></div>
+        <div class="about-card"><h4>&#9729; Cloud</h4><p>Google Cloud, AWS, Git/GitHub, Agile/Scrum workflows.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="section-label">02 - Skills</div>
+    <h2 class="section-title">Technical Stack</h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-card-header"><div class="skill-icon" style="background:rgba(0,200,100,0.1);">&#127912;</div><h4>Frontend</h4></div><div class="skill-tags"><span class="tag active">HTML</span><span class="tag active">CSS</span><span class="tag active">JavaScript</span><span class="tag active">React</span><span class="tag active">Angular</span></div></div>
+      <div class="skill-card"><div class="skill-card-header"><div class="skill-icon" style="background:rgba(124,58,237,0.1);">&#9889;</div><h4>Backend</h4></div><div class="skill-tags"><span class="tag active">Node.js</span><span class="tag active">Express</span><span class="tag active">.NET</span><span class="tag active">PHP</span><span class="tag active">Python</span><span class="tag active">Java</span></div></div>
+      <div class="skill-card"><div class="skill-card-header"><div class="skill-icon" style="background:rgba(245,158,11,0.1);">&#128451;</div><h4>Databases</h4></div><div class="skill-tags"><span class="tag active">MySQL</span><span class="tag active">MongoDB</span><span class="tag active">PostgreSQL</span><span class="tag active">Firebase</span></div></div>
+      <div class="skill-card"><div class="skill-card-header"><div class="skill-icon" style="background:rgba(59,130,246,0.1);">&#9729;</div><h4>Cloud &amp; DevOps</h4></div><div class="skill-tags"><span class="tag active">Google Cloud</span><span class="tag active">AWS</span><span class="tag active">Git</span><span class="tag active">GitHub</span></div></div>
+      <div class="skill-card"><div class="skill-card-header"><div class="skill-icon" style="background:rgba(236,72,153,0.1);">&#128241;</div><h4>Mobile</h4></div><div class="skill-tags"><span class="tag active">Flutter</span><span class="tag active">Dart</span><span class="tag active">Firebase</span><span class="tag active">Cubit</span><span class="tag active">SQFlite</span></div></div>
+      <div class="skill-card"><div class="skill-card-header"><div class="skill-icon" style="background:rgba(16,185,129,0.1);">&#128295;</div><h4>Tools &amp; APIs</h4></div><div class="skill-tags"><span class="tag active">RESTful APIs</span><span class="tag active">VS Code</span><span class="tag active">Postman</span><span class="tag active">Scrum</span></div></div>
+    </div>
+    <div style="margin-top:3rem;">
+      <h3 style="font-size:0.8rem;font-weight:700;margin-bottom:1rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;font-family:'Space Mono',monospace;">Soft Skills</h3>
+      <div class="skill-tags" style="gap:0.75rem;"><span class="tag">Problem Solving</span><span class="tag">Team Collaboration</span><span class="tag">Time Management</span><span class="tag">Communication</span><span class="tag">Adaptability</span><span class="tag">Attention to Detail</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">03 - Experience</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-divider"></div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Jun 2025 - Present</div>
+        <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+        <div class="timeline-body">
+          <h3>Full Stack Web Developer</h3>
+          <div class="company">Freelance / Self-Employed</div>
+          <ul>
+            <li>Built full-stack web apps using HTML, CSS, JavaScript and Node.js</li>
+            <li>Developed and consumed RESTful APIs for client-server communication</li>
+            <li>Designed and managed databases with MySQL and MongoDB</li>
+            <li>Implemented responsive UI designs for cross-browser compatibility</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Jun 2024 - Present</div>
+        <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+        <div class="timeline-body">
+          <h3>Flutter Mobile Developer</h3>
+          <div class="company">Freelance / Self-Employed</div>
+          <ul>
+            <li>Cross-platform apps with Flutter and Dart for Android and iOS</li>
+            <li>Chat App with real-time messaging via Firebase and Cubit</li>
+            <li>Todo List App with offline storage using SQFlite</li>
+            <li>News App fetching live content via REST API</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item timeline-last">
+        <div class="timeline-date">Oct 2023 - Jun 2024</div>
+        <div class="timeline-line"><div class="timeline-dot" style="background:var(--accent2);"></div><div class="timeline-connector"></div></div>
+        <div class="timeline-body">
+          <h3>Backend Developer - Graduation Project</h3>
+          <div class="company">Ahram Canadian University</div>
+          <ul>
+            <li>Led backend for Agriculture Auto-worker Robot (IoT)</li>
+            <li>Firebase Realtime Database for real-time data sync</li>
+            <li>JavaScript web interface for remote monitoring and control</li>
+            <li>Project awarded an Excellent grade</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label">04 - Projects</div>
+    <h2 class="section-title">What I've Built</h2>
+    <div class="section-divider"></div>
+    <div class="projects-grid">
+      <div class="project-card"><div class="project-num">01 - MOBILE</div><h3>Chat App</h3><p>Real-time messaging with Firebase backend and Cubit state management.</p><div class="skill-tags"><span class="tag active">Flutter</span><span class="tag active">Firebase</span><span class="tag active">Cubit</span></div></div>
+      <div class="project-card"><div class="project-num">02 - MOBILE</div><h3>Todo List App</h3><p>Offline-first productivity app using SQFlite for local data persistence.</p><div class="skill-tags"><span class="tag active">Flutter</span><span class="tag active">SQFlite</span><span class="tag active">Cubit</span></div></div>
+      <div class="project-card"><div class="project-num">03 - MOBILE</div><h3>News App</h3><p>Live news aggregator fetching content from external REST APIs.</p><div class="skill-tags"><span class="tag active">Flutter</span><span class="tag active">REST API</span><span class="tag active">Dart</span></div></div>
+      <div class="project-card"><div class="project-num">04 - MOBILE</div><h3>Online Supermarket</h3><p>E-commerce app with product listings, cart management and smooth UX.</p><div class="skill-tags"><span class="tag active">Flutter</span><span class="tag active">Dart</span></div></div>
+      <div class="project-card"><div class="project-num">05 - IOT / WEB</div><h3>Agriculture Auto-worker Robot</h3><p>IoT robot backend with Firebase Realtime Database and a JavaScript web dashboard for remote control.</p><div class="skill-tags"><span class="tag active">JavaScript</span><span class="tag active">Firebase</span><span class="tag active">IoT</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <div class="section-label">05 - Education</div>
+    <h2 class="section-title">Learning Path</h2>
+    <div class="section-divider"></div>
+    <div class="edu-grid">
+      <div class="edu-card"><span class="edu-badge">Degree</span><h3>BSc Computer Science &amp; AI - Software Engineering</h3><div class="school">Ahram Canadian University</div><div class="period">Sep 2019 - Jun 2024</div></div>
+      <div class="edu-card"><span class="edu-badge">Ongoing</span><h3>Digilians Program</h3><div class="school">Military Academy</div><div class="period">Dec 2025 - Present</div></div>
+      <div class="edu-card"><span class="edu-badge">Online</span><h3>Flutter &amp; Dart Development</h3><div class="school">Udemy</div><div class="period">Jun 2025 - Present</div></div>
+      <div class="edu-card"><span class="edu-badge">Completed</span><h3>Android &amp; iOS Apps (Flutter)</h3><div class="school">Black Horse Academy</div><div class="period">Jun 2024 - Aug 2024</div></div>
+      <div class="edu-card"><span class="edu-badge">Course</span><h3>Introduction to Cyber Security</h3><div class="school">Ahram Canadian University</div><div class="period">Oct 2019 - Nov 2019</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="reveal">
+    <div class="section-label">06 - Certifications</div>
+    <h2 class="section-title">Credentials</h2>
+    <div class="section-divider"></div>
+    <div class="certs-list">
+      <div class="cert-item"><div class="cert-icon">&#127760;</div><div><div class="cert-name">Web Development Fundamentals</div></div></div>
+      <div class="cert-item"><div class="cert-icon">&#9889;</div><div><div class="cert-name">JavaScript for Beginners</div></div></div>
+      <div class="cert-item"><div class="cert-icon">&#128025;</div><div><div class="cert-name">Git &amp; GitHub Essentials</div></div></div>
+      <div class="cert-item"><div class="cert-icon">&#127939;</div><div><div class="cert-name">Delivering Quality Work with Agility</div><a href="https://coursera.org/verify/9NS6J5CSGQOL" target="_blank" rel="noopener" class="cert-link">coursera.org/verify/9NS6J5CSGQOL</a></div></div>
+    </div>
+    <div style="margin-top:3.5rem;">
+      <h3 style="font-size:0.8rem;font-weight:700;margin-bottom:1.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;font-family:'Space Mono',monospace;">Languages</h3>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+        <div class="edu-card" style="min-width:150px;"><div style="font-size:1.4rem;margin-bottom:0.5rem;">&#127466;&#127468;</div><h3>Arabic</h3><div class="period">Native</div></div>
+        <div class="edu-card" style="min-width:150px;"><div style="font-size:1.4rem;margin-bottom:0.5rem;">&#127468;&#127463;</div><h3>English</h3><div class="period">Intermediate</div></div>
+        <div class="edu-card" style="min-width:150px;"><div style="font-size:1.4rem;margin-bottom:0.5rem;">&#127465;&#127466;</div><h3>German</h3><div class="period">Beginner</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">07 - Contact</div>
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="section-divider"></div>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <p>I'm open to freelance projects, full-time opportunities, and interesting collaborations. Whether you have a project in mind or just want to say hello, my inbox is always open.</p>
+        <div class="contact-links">
+          <button class="contact-link" id="btn-email"><div class="contact-link-icon">&#128231;</div><span id="lbl-email">ebramsam2001@gmail.com</span></button>
+          <button class="contact-link" id="btn-phone"><div class="contact-link-icon">&#128222;</div><span id="lbl-phone">(+20) 155-276-9905</span></button>
+          <a href="https://github.com/ebramsam2001-ctrl" target="_blank" rel="noopener" class="contact-link"><div class="contact-link-icon">&#128025;</div>github.com/ebramsam2001-ctrl</a>
+          <a href="https://www.linkedin.com/in/ebram-samuel-268b07339/" target="_blank" rel="noopener" class="contact-link"><div class="contact-link-icon">&#128188;</div>linkedin.com/in/ebram-samuel</a>
+        </div>
+      </div>
+      <div class="contact-big">
+        <p>Reach out directly</p>
+        <button id="btn-send-email" class="btn btn-primary" style="font-size:1rem;padding:1.1rem 2.5rem;margin-top:1.2rem;">Send Me an Email</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>&#169; 2026 Ebram Samuel</span>
+  <span>Cairo, Egypt</span>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  /* ---- THEME TOGGLE ---- */
+  var root = document.documentElement;
+  var btn  = document.getElementById('theme-btn');
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    btn.innerHTML = theme === 'dark' ? '&#127769;' : '&#9728;&#65039;';
+    try { localStorage.setItem('ebram-theme', theme); } catch(e) {}
+  }
+
+  var saved = 'dark';
+  try { saved = localStorage.getItem('ebram-theme') || 'dark'; } catch(e) {}
+  applyTheme(saved);
+
+  btn.addEventListener('click', function() {
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ---- SCROLL REVEAL ---- */
+  var reveals = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  reveals.forEach(function(el) { io.observe(el); });
+
+  /* ---- SMOOTH SCROLL ---- */
+  document.getElementById('get-in-touch-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  /* ---- CLIPBOARD ---- */
+  function copyText(text, labelEl, original) {
+    function done() {
+      labelEl.textContent = 'Copied!';
+      setTimeout(function() { labelEl.textContent = original; }, 2000);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function() { fallback(text, done); });
+    } else { fallback(text, done); }
+  }
+
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { document.execCommand('copy'); done(); } catch(e) { window.prompt('Copy:', text); }
+    document.body.removeChild(ta);
+  }
+
+  document.getElementById('btn-email').addEventListener('click', function() {
+    copyText('ebramsam2001@gmail.com', document.getElementById('lbl-email'), 'ebramsam2001@gmail.com');
+  });
+
+  document.getElementById('btn-phone').addEventListener('click', function() {
+    copyText('+201552769905', document.getElementById('lbl-phone'), '(+20) 155-276-9905');
+  });
+
+  /* ---- SEND EMAIL ---- */
+  document.getElementById('btn-send-email').addEventListener('click', function() {
+    window.location.href = 'mailto:ebramsam2001@gmail.com?subject=Hello%20Ebram';
+  });
+
+});
+</script>
+</body>
+</html>
