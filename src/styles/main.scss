@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// ─── Design Tokens ───────────────────────────────────────────────────────────
+:root {
+  // Dark theme (default)
+  --bg: #080810;
+  --surface: #0f0f1a;
+  --card: #14141f;
+  --accent: #6ee7b7;    // emerald-300 warm
+  --accent2: #a78bfa;   // violet-400
+  --accent3: #fbbf24;   // amber-400
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --border: rgba(255, 255, 255, 0.07);
+  --nav-bg: rgba(8, 8, 16, 0.85);
+  --glow-a: rgba(110, 231, 183, 0.08);
+  --glow-b: rgba(167, 139, 250, 0.08);
+}
+
+.light {
+  --bg: #f8f7f2;
+  --surface: #efede5;
+  --card: #ffffff;
+  --accent: #059669;
+  --accent2: #7c3aed;
+  --accent3: #d97706;
+  --text: #1e1b2e;
+  --muted: #6b7280;
+  --border: rgba(0, 0, 0, 0.08);
+  --nav-bg: rgba(248, 247, 242, 0.92);
+  --glow-a: rgba(5, 150, 105, 0.06);
+  --glow-b: rgba(124, 58, 237, 0.06);
+}
+
+// ─── Base ────────────────────────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  overflow-x: hidden;
+  transition: background 0.4s, color 0.4s;
+}
+
+// ─── Typography ──────────────────────────────────────────────────────────────
+.font-display { font-family: 'Clash Display', sans-serif; }
+.font-mono    { font-family: 'JetBrains Mono', monospace; }
+
+// ─── Scrollbar ───────────────────────────────────────────────────────────────
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+// ─── Selection ───────────────────────────────────────────────────────────────
+::selection { background: var(--accent); color: #000; }
+
+// ─── Reveal animation ────────────────────────────────────────────────────────
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ─── Noise texture overlay ───────────────────────────────────────────────────
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+// ─── Grid background ─────────────────────────────────────────────────────────
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 30%, transparent 100%);
+}
+
+// ─── Tag pill ────────────────────────────────────────────────────────────────
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.2rem;
+  background: rgba(128,128,128,0.08);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+
+  &.active {
+    background: rgba(110, 231, 183, 0.1);
+    color: var(--accent);
+    border-color: rgba(110, 231, 183, 0.25);
+  }
+}
+
+// ─── Section label ───────────────────────────────────────────────────────────
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.section-title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.section-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 1rem 0 3rem;
+}
+
+// ─── Buttons ─────────────────────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.35rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+  border: none;
+
+  &-primary {
+    background: var(--accent);
+    color: #000;
+    &:hover { filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(110,231,183,0.25); }
+  }
+
+  &-ghost {
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: transparent;
+    &:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  }
+}
+
+// ─── Card hover glow ─────────────────────────────────────────────────────────
+.card-hover {
+  transition: all 0.3s;
+  &:hover {
+    border-color: var(--accent) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+  }
+}
+
+// ─── Keyframes ───────────────────────────────────────────────────────────────
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.7); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+// ─── Project hover popup ─────────────────────────────────────────────────────
+.project-popup {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(8,8,16,0.97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  text-align: center;
+  z-index: 10;
+
+  h4 {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+}
+
+.project-card-wrap:hover .project-popup {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+// ─── Mobile nav ──────────────────────────────────────────────────────────────
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.77,0,0.175,1);
+
+  &.open { transform: translateX(0); }
+
+  a {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    transition: color 0.2s;
+    &:hover { color: var(--accent); }
+  }
+}

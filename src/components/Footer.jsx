@@ -1,0 +1,17 @@
+export default function Footer() {
+  return (
+    <footer style={{
+      borderTop: '1px solid var(--border)',
+      padding: '1.75rem 3rem',
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      flexWrap: 'wrap', gap: '0.5rem',
+    }}>
+      <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--muted)' }}>
+        © 2026 Ebram Samuel
+      </span>
+      <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--muted)' }}>
+        Cairo, Egypt
+      </span>
+    </footer>
+  )
+}
