@@ -39,7 +39,7 @@ export default function Hero() {
         gap: '3rem', flexWrap: 'wrap',
       }}>
         {/* Left text */}
-        <div style={{ flex: '1 1 480px', maxWidth: 640 }}>
+        <div style={{ flex: '1 1 480px', maxWidth: 800 }}>
           {/* Badge */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
@@ -97,13 +97,13 @@ export default function Hero() {
               View My Work ↗
             </a>
             <a href="#contact" className="btn btn-ghost" onClick={e => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) }}>
-              Get In Touch
+              Get In Touch ↗
             </a>
             <a href="https://github.com/ebramsam2001-ctrl" target="_blank" rel="noopener" className="btn btn-ghost">
-              GitHub
+              GitHub ↗
             </a>
             <a href="https://www.linkedin.com/in/ebram-samuel-268b07339/" target="_blank" rel="noopener" className="btn btn-ghost">
-              LinkedIn
+              LinkedIn ↗
             </a>
           </div>
 
