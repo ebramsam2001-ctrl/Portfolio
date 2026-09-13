@@ -1,6 +1,28 @@
 import { useState } from 'react'
 
-const projects = [
+interface ProjectLink {
+  label: string
+  href: string
+}
+
+interface ProjectPopup {
+  icon: string
+  title: string
+  description: string
+  links: ProjectLink[]
+}
+
+interface Project {
+  num: string
+  title: string
+  desc: string
+  tags: string[]
+  accent?: boolean
+  isNew?: boolean
+  popup: ProjectPopup | null
+}
+
+const projects: Project[] = [
   {
     num: '01 — MOBILE',
     title: 'Chat App',
@@ -43,6 +65,7 @@ const projects = [
     tags: ['React', 'Node.js', 'Express', 'MongoDB'],
     accent: true,
     popup: {
+      icon: '🛒',
       title: 'E-Commerce Platform',
       description: 'A complete full-stack e-commerce application with modern React frontend and robust Node.js backend.',
       links: [
@@ -57,9 +80,36 @@ const projects = [
       ],
     },
   },
+  {
+    num: '07 — FULL STACK',
+    title: 'HRM System (Human Resource Management)',
+    desc: 'Comprehensive Human Resource Management system featuring employee record administration, attendance tracking, role-based access control, and performance management.',
+    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Socket.io', 'Validation'],
+    accent: true,
+    isNew: true,
+    popup: {
+      icon: '👥',
+      title: 'HRM System',
+      description: 'Human Resource Management system with employee record administration, attendance tracking, and role-based access control.',
+      links: [
+        {
+          label: '💻 View on GitHub',
+          href: 'https://github.com/ebramsam2001-ctrl/Digilians-Capston-Final-Project-Indevidual-HRM.git',
+        },
+      ],
+    },
+  },
+  {
+    num: '08 — FULL STACK / WEB',
+    title: 'Kemet-Gate',
+    desc: 'Modern web platform for smart access control and tourism services, integrating secure user authentication, interactive dashboards, and real-time backend API operations.',
+    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'REST API'],
+    isNew: true,
+    popup: null,
+  },
 ]
 
-function ProjectCard({ project }) {
+function ProjectCard({ project }: { project: Project }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -94,7 +144,7 @@ function ProjectCard({ project }) {
       </div>
       <h3 className="font-display" style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.65rem' }}>
         {project.title}
-        {project.accent && (
+        {project.isNew && (
           <span style={{
             marginLeft: '0.5rem', fontSize: '0.65rem',
             background: 'var(--accent)', color: '#000',
@@ -113,7 +163,7 @@ function ProjectCard({ project }) {
       {/* Hover popup for E-Commerce */}
       {project.popup && (
         <div className="project-popup">
-          <div style={{ fontSize: '2rem' }}>🛒</div>
+          <div style={{ fontSize: '2rem' }}>{project.popup.icon}</div>
           <h4>{project.popup.title}</h4>
           <p>{project.popup.description}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', width: '100%', marginTop: '0.5rem' }}>

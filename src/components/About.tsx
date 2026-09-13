@@ -1,8 +1,14 @@
-const cards = [
-  { icon: '💻', title: 'Frontend', desc: 'Responsive UIs with HTML, CSS, JavaScript, React and Angular.' },
-  { icon: '⚙️', title: 'Backend', desc: 'Scalable APIs with Node.js, Express, .NET, PHP, Python and Java.' },
+interface AboutCard {
+  icon: string
+  title: string
+  desc: string
+}
+
+const cards: AboutCard[] = [
+  { icon: '💻', title: 'Frontend', desc: 'Responsive UIs with HTML, CSS, JavaScript ES6+, React, Redux and Next.js.' },
+  { icon: '⚙️', title: 'Backend', desc: 'Scalable RESTful APIs with Node.js, Express, JWT authentication and Redis.' },
   { icon: '📱', title: 'Mobile', desc: 'Cross-platform apps with Flutter and Dart for Android and iOS.' },
-  { icon: '☁️', title: 'Cloud', desc: 'Google Cloud, AWS, Git/GitHub, Agile/Scrum workflows.' },
+  { icon: '☁️', title: 'Cloud', desc: 'AWS, Docker, Kubernetes, Linux, Git/GitHub, Agile/Scrum workflows.' },
 ]
 
 export default function About() {

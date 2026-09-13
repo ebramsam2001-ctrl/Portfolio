@@ -1,12 +1,26 @@
-const edu = [
+interface EduItem {
+  badge: string
+  title: string
+  school: string
+  period: string
+  color: string
+}
+
+const edu: EduItem[] = [
   { badge: 'Degree',    title: 'BSc Computer Science & AI — Software Engineering', school: 'Ahram Canadian University', period: 'Sep 2019 – Jun 2024', color: 'var(--accent3)' },
-  { badge: 'Ongoing',   title: 'Digilians Program',                                 school: 'Military Academy',          period: 'Dec 2025 – Present',  color: 'var(--accent)' },
+  { badge: 'Completed', title: 'Digilians Program',                                 school: 'Military Academy',          period: 'Dec 2025 – Sep 2026', color: 'var(--accent)' },
   { badge: 'Online',    title: 'Flutter & Dart Development',                        school: 'Udemy',                     period: 'Jun 2025 – Present',  color: 'var(--accent2)' },
   { badge: 'Completed', title: 'Android & iOS Apps (Flutter)',                      school: 'Black Horse Academy',       period: 'Jun 2024 – Aug 2024', color: 'var(--accent)' },
   { badge: 'Course',    title: 'Introduction to Cyber Security',                    school: 'Ahram Canadian University', period: 'Oct 2019 – Nov 2019', color: 'var(--accent2)' },
 ]
 
-const langs = [
+interface LangItem {
+  flag: string
+  name: string
+  level: string
+}
+
+const langs: LangItem[] = [
   { flag: '🇪🇬', name: 'Arabic',  level: 'Native' },
   { flag: '🇬🇧', name: 'English', level: 'Intermediate' },
   { flag: '🇩🇪', name: 'German',  level: 'Beginner' },

@@ -1,10 +1,18 @@
 import { useState } from 'react'
 
-function CopyLink({ icon, label, copyValue, href }) {
+interface CopyLinkProps {
+  icon: string
+  label: string
+  copyValue?: string
+  href?: string
+}
+
+function CopyLink({ icon, label, copyValue, href }: CopyLinkProps) {
   const [copied, setCopied] = useState(false)
 
   const handleClick = () => {
     if (href) { window.open(href, '_blank'); return }
+    if (!copyValue) return
     navigator.clipboard?.writeText(copyValue).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)

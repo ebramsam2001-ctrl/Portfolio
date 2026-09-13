@@ -1,14 +1,23 @@
-const items = [
+interface ExperienceItem {
+  date: string
+  title: string
+  company: string
+  color: string
+  bullets: string[]
+}
+
+const items: ExperienceItem[] = [
   {
     date: 'Jun 2025 – Present',
     title: 'Full Stack Web Developer',
     company: 'Freelance / Self-Employed',
     color: 'var(--accent)',
     bullets: [
-      'Built full-stack web apps using HTML, CSS, JavaScript and Node.js',
-      'Developed and consumed RESTful APIs for client–server communication',
-      'Designed and managed databases with MySQL and MongoDB',
-      'Implemented responsive UI designs for cross-browser compatibility',
+      'Architected and deployed scalable full-stack web applications using React.js, Node.js, Express.js, and MongoDB.',
+      'Designed robust RESTful APIs featuring JWT authentication, custom logging, role-based access control, and secure file uploads.',
+      'Modeled efficient database schemas with MongoDB/Mongoose and SQL, optimizing data validation and query performance.',
+      'Built dynamic, responsive front-end interfaces with React, TypeScript, and Tailwind CSS for seamless user experiences.',
+      'Configured cloud infrastructure and deployment pipelines utilizing AWS services and containerized environments with Docker.',
     ],
   },
   {

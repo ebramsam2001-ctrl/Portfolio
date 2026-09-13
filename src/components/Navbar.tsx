@@ -1,8 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
 const links = ['About','Skills','Experience','Projects','Education','Contact']
 
-export default function Navbar({ dark, setDark }) {
+interface NavbarProps {
+  dark: boolean
+  setDark: Dispatch<SetStateAction<boolean>>
+}
+
+export default function Navbar({ dark, setDark }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -12,7 +17,7 @@ export default function Navbar({ dark, setDark }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const scrollTo = (id) => {
+  const scrollTo = (id: string) => {
     document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' })
     setMenuOpen(false)
   }
@@ -53,8 +58,8 @@ export default function Navbar({ dark, setDark }) {
                   fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase',
                   color: 'var(--muted)', transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => e.target.style.color = 'var(--accent)'}
-                onMouseLeave={e => e.target.style.color = 'var(--muted)'}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
               >
                 {l}
               </button>

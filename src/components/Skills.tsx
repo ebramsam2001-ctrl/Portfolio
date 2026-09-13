@@ -1,11 +1,18 @@
-const skills = [
+interface SkillCategory {
+  icon: string
+  label: string
+  color: string
+  tags: string[]
+}
+
+const skills: SkillCategory[] = [
   {
     icon: '🎨', label: 'Frontend', color: 'rgba(110,231,183,0.1)',
-    tags: ['HTML','CSS','JavaScript','TypeScript','React','Angular','Bootstrap','Sass','Tailwind'],
+    tags: ['HTML','CSS','JavaScript ES6+','TypeScript','React','Bootstrap','Sass','Tailwind','Redux','Next.js'],
   },
   {
     icon: '⚡', label: 'Backend', color: 'rgba(167,139,250,0.1)',
-    tags: ['Node.js','Express','.NET','PHP','Python','Java'],
+    tags: ['Node.js','Express','Python','Middleware','Controllers','Services Pattern','Redis','Socket.io','JWT','Validation','Authentication','Authorization','RESTful APIs'],
   },
   {
     icon: '🗄️', label: 'Databases', color: 'rgba(251,191,36,0.1)',
@@ -13,34 +20,37 @@ const skills = [
   },
   {
     icon: '☁️', label: 'Cloud', color: 'rgba(96,165,250,0.1)',
-    tags: ['Google Cloud','AWS','Git','GitHub'],
+    tags: ['AWS','Git','GitHub','Docker','Kubernetes','Linux'],
   },
   {
     icon: '📱', label: 'Mobile', color: 'rgba(244,114,182,0.1)',
-    tags: ['Flutter','Dart','Firebase','Cubit','SQFlite','Android Studio'],
+    tags: ['Flutter','Dart','Firebase','Cubit','SQFlite','Android Studio','Cross-Platform'],
   },
   {
     icon: '🔧', label: 'Tools & APIs', color: 'rgba(52,211,153,0.1)',
-    tags: ['RESTful APIs','VS Code','Postman','WordPress','SEO','Web Security'],
+    tags: ['RESTful APIs','VS Code','Postman','SEO','Web Security','npm / yarn','Agile/Scrum','OOP'],
   },
 ]
 
-const devopsTools = [
-  { name: 'Docker',      icon: '🐳' },
-  { name: 'Linux',       icon: '🐧' },
-  { name: 'Kubernetes',  icon: '☸️' },
-  { name: 'Jenkins',     icon: '🔁' },
-  { name: 'Prometheus',  icon: '📈' },
-  { name: 'SonarQube',   icon: '🔍' },
-  { name: 'Maven',       icon: '📦' },
-  { name: 'Grafana',     icon: '📊' },
-  { name: 'Ansible',     icon: '⚙️' },
-  { name: 'Terraform',   icon: '🌍' },
+interface DevopsTool {
+  name: string
+  icon: string
+}
+
+const devopsTools: DevopsTool[] = [
+  { name: 'Docker',         icon: '🐳' },
+  { name: 'Kubernetes',     icon: '☸️' },
+  { name: 'Linux',          icon: '🐧' },
+  { name: 'GitHub Actions', icon: '🔁' },
+  { name: 'CI/CD',          icon: '🔄' },
+  { name: 'AWS',            icon: '☁️' },
+  { name: 'Ansible',        icon: '⚙️' },
+  { name: 'Terraform',      icon: '🌍' },
 ]
 
-const soft = ['Problem Solving','Team Collaboration','Time Management','Communication','Adaptability','Attention to Detail']
+const soft = ['Problem Solving','Team Collaboration','Time Management','Communication','Adaptability','Attention to Detail','Effective Communication','Continuous Learning']
 
-function SkillCard({ s }) {
+function SkillCard({ s }: { s: SkillCategory }) {
   return (
     <div
       style={{
@@ -174,7 +184,7 @@ export default function Skills() {
                 Agile Methodology
               </h4>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
-                {['Scrum','Sprint Planning','Kanban','Retrospectives','Daily Standups'].map(t => (
+                {['Scrum','Sprint Planning','Kanban','Retrospectives','Daily Standups','Agile / Scrum','Jira / Trello','Git Flow'].map(t => (
                   <span key={t} className="tag" style={{ borderColor: 'rgba(251,191,36,0.25)', color: 'var(--accent3)', background: 'rgba(251,191,36,0.06)' }}>{t}</span>
                 ))}
               </div>

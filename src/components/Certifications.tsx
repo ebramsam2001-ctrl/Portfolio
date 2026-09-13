@@ -1,8 +1,17 @@
-const certs = [
+interface Cert {
+  icon: string
+  name: string
+  link: string | null
+}
+
+const certs: Cert[] = [
   { icon: '🌐', name: 'Web Development Fundamentals', link: null },
   { icon: '⚡', name: 'JavaScript for Beginners', link: null },
   { icon: '🐙', name: 'Git & GitHub Essentials', link: null },
   { icon: '🏃', name: 'Delivering Quality Work with Agility', link: 'https://coursera.org/verify/9NS6J5CSGQOL' },
+  { icon: '🎨', name: 'Meta Front-End Developer', link: 'https://drive.google.com/file/d/1XiMMBKcw60S4Wp2QcNLnRXEXsPLpz6Od/view?usp=sharing' },
+  { icon: '⚙️', name: 'DevOps Complete Course', link: 'https://drive.google.com/file/d/1VjnVAxdPeSCslkF2LqnACX_NEksxuzGj/view?usp=sharing' },
+  { icon: '☁️', name: 'AWS Certified Cloud Practitioner', link: 'https://drive.google.com/file/d/1jtdlqARHF5iMW-ESaJfUFbsob-CDXQnD/view?usp=sharing' },
 ]
 
 export default function Certifications() {
@@ -42,8 +51,8 @@ export default function Certifications() {
                     rel="noopener noreferrer"
                     className="font-mono"
                     style={{ fontSize: '0.65rem', color: 'var(--accent)', textDecoration: 'none', display: 'block' }}
-                    onMouseEnter={e => e.target.style.textDecoration = 'underline'}
-                    onMouseLeave={e => e.target.style.textDecoration = 'none'}
+                    onMouseEnter={e => e.currentTarget.style.textDecoration = 'underline'}
+                    onMouseLeave={e => e.currentTarget.style.textDecoration = 'none'}
                   >
                     {c.link} ↗
                   </a>
